@@ -5,13 +5,12 @@ agent behavior, and data-oriented design. This repository represents an
 active work in progress and is not yet production-ready.
 
 ## Project Status
-🚧 **Early / Experimental**
+**Early / Experimental**
 - Core architecture is under active development
 - APIs are unstable and subject to change
 - Performance, security, and UX are not finalized
 
 ## Current Capabilities
-- [Brief, factual bullet points of what actually works]
 - Example: Core loop scaffolding
 - Example: Prototype entity/component system
 - Example: Early data ingestion or simulation logic
