@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mayor-engine"
+version = "0.2.0"
+description = "Portable Python-first mayor simulation with dual NN engines and advisor LLM layer"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "MAYOR"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mayor_engine*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
