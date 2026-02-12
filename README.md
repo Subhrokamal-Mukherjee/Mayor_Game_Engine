@@ -1,36 +1,56 @@
-# MAYOR – Experimental Game Engine (Work in Progress)
+# MAYOR Engine v2 (Ground-Up Python Rebuild)
 
-MAYOR is an experimental game engine exploring simulation-driven systems,
-agent behavior, and data-oriented design. This repository represents an
-active work in progress and is not yet production-ready.
+A clean-slate, portability-first simulation platform where the player acts as mayor.
 
-## Project Status
-**Early / Experimental**
-- Core architecture is under active development
-- APIs are unstable and subject to change
-- Performance, security, and UX are not finalized
+## Product Direction
+Two-learning-engine architecture plus one narrative layer:
 
-## Current Capabilities
-- Example: Core loop scaffolding
-- Example: Prototype entity/component system
-- Example: Early data ingestion or simulation logic
+1. **Economic Engine (NN + RL training target)**
+2. **Political Engine (NN + RL training target)**
+3. **Advisor Council Layer (small LLM fine-tuning target)**
 
-## What Is Not Done Yet
-- Rendering pipeline (incomplete)
-- Tooling / editor support
-- Documentation beyond high-level notes
-- Testing and benchmarking
+## What this revision fixes
+- Removes legacy C++/Windows-bound runtime from active code paths.
+- Provides a deterministic Python baseline that runs without external ML dependencies.
+- Adds a true **20,000 action** hierarchical catalog for RL experiments.
+- Separates concerns into `core`, `models`, `rl`, `llm`, and `interfaces` modules.
 
-## Why This Repo Exists
-This repository exists to:
-- Track development publicly
-- Share architectural experiments
-- Serve as a portfolio and learning artifact
+## Architecture
 
-## Not Ready For
-- Production use
-- Commercial deployment
-- External contributions (for now)
+```text
+action_id -> ActionCatalog (hierarchical action)
+          -> MayorSimulator
+               -> EconomicEngine (TinyMLP)
+               -> PoliticalEngine (TinyMLP)
+               -> FusionEngine
+          -> state + rewards
+          -> AdvisorCouncil narrative brief
+```
 
-## License
-MIT
+## Action Space (20K)
+`ActionCatalog` deterministically builds 20,000 unique actions using:
+- 8 domains
+- 10 policy families
+- 10 variants
+- 5 intensity levels
+- 5 targeting modes
+- 5 durations
+
+## Portability
+- Python 3.10+
+- No hardcoded machine paths
+- No OS-specific APIs
+- Dependency-free core runtime
+
+## Next Training Steps
+1. Replace `TinyMLP` with PyTorch modules behind a feature flag.
+2. Add PPO/SAC training loops for economic and political objectives.
+3. Add fusion-head training for uncertainty and tradeoff scoring.
+4. Fine-tune a small advisor LLM (LoRA/QLoRA) on state-to-brief corpora.
+5. Build a dashboard API and front-end.
+
+## Run
+```bash
+python -m pytest -q
+PYTHONPATH=. python scripts/smoke_run.py
+```

@@ -1,0 +1,18 @@
+seed: 42
+runtime:
+  python_min: "3.10"
+  device: cpu
+  deterministic: true
+simulation:
+  max_turns: 260
+action_space:
+  strategy: hierarchical_catalog
+  unique_actions: 20000
+training:
+  economic_engine: ppo_target
+  political_engine: ppo_target
+  fusion: multi_objective
+llm:
+  role: narrative_interpreter
+  model_family: small_open_llm
+  finetune_method: qlora
